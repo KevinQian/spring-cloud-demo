@@ -1,0 +1,24 @@
+spring:
+  application:
+    name: api-gateway-zuul
+  main:
+    allow-bean-definition-overriding: false
+server:
+  port: 8083
+zuul:
+  routes:
+    api-hello:
+      path: /api-hello/**
+      serviceId: hello-service
+eureka:
+  client:
+    service-url:
+      defaultZone: http://peer1:8081/eureka/
+security:
+  oauth2:
+    resource:
+      id: api-gateway-zuul
+      token-info-uri: http://localhost:8085/oauth/check_token
+    client:
+      client-secret: 123456
+      client-id: client_4

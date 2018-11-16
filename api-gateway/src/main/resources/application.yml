@@ -1,0 +1,36 @@
+spring:
+  application:
+    name: api-gateway
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+    #  filter:OAuth2AuthenticationProcessingFilter
+
+#  webflux:
+#    hiddenmethod:
+#      filter:
+#        enabled: false
+eureka:
+  client:
+    service-url:
+      defaultZone: http://peer1:8081/eureka/
+logging:
+  level:
+    org.springframework.cloud.gateway: debug
+server:
+  port: 8084
+
+security:
+  oauth2:
+    resource:
+      token-info-uri: http://localhost:8085/oauth/check_token
+      prefer-token-info: true
+    client:
+      access-token-uri: http://localhost:8085/oauth/token
+      user-authorization-uri: http://localhost:8085/oauth/authorize
+      client-secret: 123456
+      client-id: client_1
+      scope: select
+      grant-type: password
